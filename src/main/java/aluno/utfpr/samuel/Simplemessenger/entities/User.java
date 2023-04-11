@@ -1,5 +1,6 @@
 package aluno.utfpr.samuel.Simplemessenger.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,11 +8,12 @@ import javax.persistence.Id;
 import javax.validation.constraints.Email;
 
 @Entity
-public class User {
+public class User implements ComparableEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    @Column(name = "user_id")
+    private Long id;
     
     private String nick;
     @Email
@@ -19,8 +21,8 @@ public class User {
     
     private String password;
 
-    public Long getUserId(){
-        return userId;
+    public Long getId(){
+        return id;
     }
     public String getNick(){
         return nick;
@@ -31,8 +33,8 @@ public class User {
     public String getPassword(){
         return password;
     }
-    public void setUserId(Long userId){
-        this.userId = userId;
+    public void setId(Long userId){
+        this.id = userId;
     }
     public void setNick(String nick) {
         this.nick = nick;
@@ -43,5 +45,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
     
 }
