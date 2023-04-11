@@ -2,6 +2,7 @@ package aluno.utfpr.samuel.Simplemessenger.entities;
 
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -12,10 +13,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class Message {
+public class Message implements ComparableEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long messageId;
+    @Column(name = "message_id")
+    private Long id;
 
     private String messageText;
 
@@ -30,12 +32,12 @@ public class Message {
     @Temporal(TemporalType.TIMESTAMP)
     private Date messageTime;
 
-    public Long getMessageId() {
-        return messageId;
+    public Long getId() {
+        return id;
     }
 
-    public void setMessageId(Long messageId) {
-        this.messageId = messageId;
+    public void setId(Long messageId) {
+        this.id = messageId;
     }
 
     public String getMessageText() {
@@ -54,6 +56,15 @@ public class Message {
         this.messageTime = messageTime;
     }
 
-
+    public boolean equals(ComparableEntity comparable){
+        try{
+            Message anoderMessage = (Message) comparable;
+            return  anoderMessage != null &&
+            this.getId() == anoderMessage.getId();
+        }catch(ClassCastException  ex){
+            return false;
+        }
+        
+    }
     
 }
