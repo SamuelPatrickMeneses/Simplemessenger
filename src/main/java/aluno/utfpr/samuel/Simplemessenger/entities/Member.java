@@ -1,12 +1,13 @@
 package aluno.utfpr.samuel.Simplemessenger.entities;
 
-import javax.persistence.Column;
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 @Entity
-public class Member {
+public class Member implements Serializable{
 
     @Id
     @ManyToOne
