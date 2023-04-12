@@ -19,6 +19,10 @@ public class Message implements ComparableEntity{
     @Column(name = "message_id")
     private Long id;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date messageTime;
+
+
     private String messageText;
 
     @ManyToOne
@@ -29,8 +33,24 @@ public class Message implements ComparableEntity{
     @JoinColumn(name = "chat_id")
     private Chat messageChat;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date messageTime;
+    public User getMessageUser() {
+        return messageUser;
+    }
+
+    public void setMessageUser(User messageUser) {
+        this.messageUser = messageUser;
+    }
+
+
+
+    public Chat getMessageChat() {
+        return messageChat;
+    }
+
+    public void setMessageChat(Chat messageChat) {
+        this.messageChat = messageChat;
+    }
+
 
     public Long getId() {
         return id;
@@ -60,7 +80,10 @@ public class Message implements ComparableEntity{
         try{
             Message anoderMessage = (Message) comparable;
             return  anoderMessage != null &&
-            this.getId() == anoderMessage.getId();
+            this.getId() == anoderMessage.getId() &&
+            this.getMessageUser().equals(anoderMessage.getMessageUser()) &&
+            this.getMessageChat().equals(anoderMessage.getMessageChat());
+
         }catch(ClassCastException  ex){
             return false;
         }
