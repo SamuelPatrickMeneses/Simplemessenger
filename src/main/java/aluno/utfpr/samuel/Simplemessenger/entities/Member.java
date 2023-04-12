@@ -9,13 +9,11 @@ import javax.persistence.ManyToOne;
 public class Member {
 
     @Id
-    @Column(name = "user_id")
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User userId;
 
     @Id
-    @Column(name = "chat_id")
     @ManyToOne
     @JoinColumn(name = "chat_id")
     private Chat chat;
